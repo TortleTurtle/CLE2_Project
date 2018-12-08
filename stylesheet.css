@@ -1,0 +1,130 @@
+html, body {
+    background-color: #FFFFFF;
+}
+
+body {
+    width: 100%;
+    height: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    font-style: normal;
+    color: #3B4040;
+}
+
+.container {
+    display: flex;
+}
+
+/* CSS voor de header*/
+header {
+    background-color: #FF662E;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    color: #FFFFFF;
+}
+header h4 {
+    font-family: Poiret One, sans-serif;
+    font-size: large;
+    font-weight: bold;
+    font-style: normal;
+    line-height: inherit;
+}
+
+/*CSS voor de navbar*/
+.navbar {
+    width: 100%;
+    height: auto;
+    background-color: #DEDEDE;
+    color: #000000;
+    display: flex;
+    justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875em;
+    align-items: center;
+}
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-grow: 3;
+}
+.navbar ul li {
+    display: flex;
+    margin: auto;
+    font: inherit;
+}
+.navbar a {
+    font-style: inherit;
+    color: #000000;
+    text-decoration: none;
+}
+.navbar .container{
+    display: flex;
+    flex-basis: 20%;
+    justify-content: left;
+    flex-grow: 1;
+}
+#logo {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    max-height: 200px;
+    flex-basis: 30%;
+}
+
+@media screen and (max-width: 600px) {
+    #logo, .navbar .container {
+        display: none;
+    }
+}
+
+
+
+@media screen and (min-width: 600px){
+    #formcontainer {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+/* Alle CSS voor de forms */
+#formcontainer fieldset{
+    display: flex;
+    flex-basis: 40%;
+}
+
+.form-row {
+    flex: 1;
+}
+
+input {
+    flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Poiret One, sans-serif;
+}
+h1 {
+    font-size: 3.75em;
+}
+h2 {
+    font-size: 3em;
+}
+h3 {
+    font-size: 2.5em;
+    font-weight: normal;
+    font-style: normal;
+    line-height: initial;
+}
+h4 {
+    font-size: 2em;
+}
+h5 {
+    font-size: 1.5em;
+}
+h6 {
+    font-size: 1.25em;
+}
