@@ -12,10 +12,6 @@ body {
     color: #3B4040;
 }
 
-.container {
-    display: flex;
-}
-
 /* CSS voor de header*/
 header {
     background-color: #FF662E;
@@ -48,6 +44,7 @@ header h4 {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-around;
     flex-grow: 3;
 }
@@ -81,27 +78,21 @@ header h4 {
     }
 }
 
-
-
-@media screen and (min-width: 600px){
-    #formcontainer {
-        display: flex;
-        justify-content: space-around;
-    }
-}
-
-/* Alle CSS voor de forms */
-#formcontainer fieldset{
+/* Forms */
+#formcontainer form {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#detailscontainer {
     flex-basis: 40%;
 }
-
-.form-row {
-    flex: 1;
+#contactcontainer {
+    flex-basis: 40%;
 }
-
-input {
-    flex: 1;
+.button {
+    display: block;
 }
 
 h1, h2, h3, h4, h5, h6 {
