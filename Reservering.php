@@ -11,7 +11,7 @@
 
 <body>
 <header>
-    <h3>Bijzonder lekker eten!</h3>
+    <h2>Bijzonder lekker eten!</h2>
     <div class="navbar">
         <div class="container">
         <img src="http://bijelles.nl/.cm4all/mediadb/logo%20zwart.png" id="logo" alt="BijElles Logo"/>

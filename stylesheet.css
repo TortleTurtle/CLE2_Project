@@ -1,5 +1,7 @@
 html, body {
     background-color: #FFFFFF;
+    padding: 0px;
+    margin: 0px;
 }
 
 body {
@@ -20,7 +22,7 @@ header {
     height: auto;
     color: #FFFFFF;
 }
-header h4 {
+header h3 {
     font-family: Poiret One, sans-serif;
     font-size: large;
     font-weight: bold;
@@ -30,51 +32,43 @@ header h4 {
 
 /*CSS voor de navbar*/
 .navbar {
-    width: 100%;
-    height: auto;
     background-color: #DEDEDE;
-    color: #000000;
-    display: flex;
-    justify-content: space-around;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.875em;
-    align-items: center;
-}
-.navbar ul {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-grow: 3;
-}
-.navbar ul li {
-    display: flex;
-    margin: auto;
-    font: inherit;
-}
-.navbar a {
-    font-style: inherit;
-    color: #000000;
-    text-decoration: none;
+    color: black;
 }
 .navbar .container{
-    display: flex;
-    flex-basis: 20%;
-    justify-content: left;
-    flex-grow: 1;
+    width: 40%;
+    height: auto;
 }
-#logo {
+.navbar ul{
+    display: flex;
+    flex-basis: 40%;
+    flex-wrap: wrap;
+    margin: auto;
+    align-items: center;
+}
+.navbar li {
+    list-style-type: none;
+    margin: auto;
+    padding: 10px;
+}
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+.navbar img {
     width: 100%;
     height: auto;
-    justify-content: center;
-    max-height: 200px;
-    flex-basis: 30%;
+    margin: auto;
+
 }
 
-@media screen and (max-width: 600px) {
-    #logo, .navbar .container {
-        display: none;
+@media screen and (min-width: 850px) {
+    .navbar {
+        display: flex;
+    }
+    .navbar .container {
+        margin-left: 30px;
+        flex-basis: 30%;
     }
 }
 
@@ -118,4 +112,9 @@ h5 {
 }
 h6 {
     font-size: 1.25em;
+}
+
+@font-face {
+    font-family: "Poiret One";
+    src: url("fonts/PoiretOne-Regular.ttf");
 }
