@@ -14,6 +14,21 @@ body {
     color: #3B4040;
 }
 
+/* standaard row class voor flexbox gebruik */
+.row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+#maken, #aanpassen, #agenda {
+    width: 30%;
+    height: auto;
+}
+
 /* CSS voor de header*/
 header {
     background-color: #FF662E;
@@ -30,46 +45,15 @@ header h3 {
     line-height: inherit;
 }
 
-/*CSS voor de navbar*/
-.navbar {
-    background-color: #DEDEDE;
-    color: black;
-}
-.navbar .container{
-    width: 40%;
-    height: auto;
-}
-.navbar ul{
+/* Css bedoeld voor divs rondom een form gewrapped */
+div.form {
     display: flex;
-    flex-basis: 40%;
-    flex-wrap: wrap;
-    margin: auto;
-    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    line-height: 1.50em;
 }
-.navbar li {
-    list-style-type: none;
-    margin: auto;
-    padding: 10px;
-}
-.navbar a {
-    text-decoration: none;
-    color: inherit;
-}
-.navbar img {
-    width: 100%;
-    height: auto;
-    margin: auto;
-
-}
-
-@media screen and (min-width: 850px) {
-    .navbar {
-        display: flex;
-    }
-    .navbar .container {
-        margin-left: 30px;
-        flex-basis: 30%;
-    }
+div.formrow {
+    display: flex;
 }
 
 /* Forms */
@@ -85,10 +69,8 @@ header h3 {
 #contactcontainer {
     flex-basis: 40%;
 }
-.button {
-    display: block;
-}
 
+/*CSS voor de standaard formats van de headers*/
 h1, h2, h3, h4, h5, h6 {
     font-family: Poiret One, sans-serif;
 }
@@ -116,5 +98,5 @@ h6 {
 
 @font-face {
     font-family: "Poiret One";
-    src: url("includes/fonts/PoiretOne-Regular.ttf");
+    src: url("../includes/fonts/PoiretOne-Regular.ttf");
 }
