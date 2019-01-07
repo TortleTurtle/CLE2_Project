@@ -8,24 +8,24 @@ include_once '../includes/php/connect.php';
 $fout = "";
 
 //Deze if controleerd of er al ingelogd is.
-if (isset($_SESSION['gebruikersnaam'])){
+if ( isset($_SESSION['gebruikersnaam']) ) {
     header('location: adminpagina.php');
     //exit het script om te voorkomen dat de rest van de pagina getoond wordt.
     exit();
 }
 
-if (isset($_POST['submit'])) {
-    $gebruikersnaam = mysqli_real_escape_string($db, $_POST['naam']);
-    $wachtwoord = mysqli_real_escape_string($db,$_POST['wachtwoord']);
+if ( isset($_POST['submit']) ) {
+    $gebruikersnaam = mysqli_real_escape_string( $db, $_POST['naam'] );
+    $wachtwoord = mysqli_real_escape_string( $db, $_POST['wachtwoord'] );
 
     $querry = "SELECT * FROM beheerders WHERE naam = '$gebruikersnaam'";
-    $result = mysqli_query($db, $querry);
+    $result = mysqli_query( $db, $querry );
 
-    $inloggegevens = mysqli_fetch_assoc($result);
+    $inloggegevens = mysqli_fetch_assoc( $result );
 
     echo 'submit is ingedrukt';
 
-    if ($gebruikersnaam == $inloggegevens['naam'] && $wachtwoord == $inloggegevens['wachtwoord']){
+    if ( $gebruikersnaam == $inloggegevens['naam'] && $wachtwoord == $inloggegevens['wachtwoord'] ){
         $_SESSION['gebruikersnaam'] = $gebruikersnaam;
         echo 'succes!';
     }
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
 <div class="main">
     <div class="form" id="login">
     <div class="container">
-        <p class="error"><?=$fout;?></p>
+        <p class="error"><?= $fout; ?></p>
         <form target="login.php" method="post">
             <label for="naam">Gebruikersnaam</label>
             <div class="formrow"><input type="text" name="naam" id="naam" placeholder="Vul je gebruikersnaam in:"></div><br>

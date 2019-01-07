@@ -2,12 +2,17 @@
 //start de sessie om de sessievariablen op te kunnen halen.
 session_start();
 
-if (!(isset($_SESSION['gebruikersnaam']))) {
+if ( !(isset( $_SESSION['gebruikersnaam'] ) ) ) {
+    //doorsturen naar de inlog pagina.
     header('location: login.php');
     //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
     exit();
 }
 
+//uitloggen.
+if ( isset( $_POST['logout'] ) ) {
+    session_destroy();
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -39,12 +44,19 @@ if (!(isset($_SESSION['gebruikersnaam']))) {
             <!--</a>-->
         </div>
         <div class="container" id="agenda">
-            <!--<a href="link.html">-->
+            <a href="agenda.php">
                 <div class="container">
                     <h5>Agenda</h5>
                     <p>Klik hier om de agenda te zien.</p>
                 </div>
-            <!--</a>-->
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <form action="adminpagina.php" name="logout" id="logout" method="post">
+                <input type="submit" name="logout" id="logout" value="logout">
+            </form>
         </div>
     </div>
 </div>

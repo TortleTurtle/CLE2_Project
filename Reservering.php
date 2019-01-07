@@ -1,23 +1,22 @@
 <?php
 include_once "includes/php/connect.php";
 
-if (isset($_POST['submit'])) {
-    $voornaam = mysqli_real_escape_string($db, $_POST['voornaam']);
-    $achternaam = mysqli_real_escape_string($db, $_POST["achternaam"]);
-    $telnummer = $_POST["tel"];
-    $email = mysqli_real_escape_string($db, $_POST["email"]);
+if ( isset ( $_POST[ 'submit' ] ) ) {
+    $voornaam = mysqli_real_escape_string( $db, $_POST[ 'voornaam' ] );
+    $achternaam = mysqli_real_escape_string( $db, $_POST[ "achternaam" ] );
+    $telnummer = $_POST[ "tel" ];
+    $email = mysqli_real_escape_string( $db, $_POST[ "email" ] );
 
     //Dit is voor de keuze tafelen of afhalen.
-    $keuze = $_POST["keuze"];
+    $keuze = $_POST[ "keuze" ];
 
-    $personen = $_POST["pers"];
-    $maaltijd_1 = $_POST["maaltijd_1"];
-    $maaltijd_2 = $_POST["maaltijd_2"];
-    $datum = $_POST["datum"];
-    $tijd = $_POST["tijd"];
+    $personen = $_POST[ "pers" ];
+    $maaltijd_1 = $_POST[ "maaltijd_1" ];
+    $maaltijd_2 = $_POST[ "maaltijd_2" ];
+    $datum = $_POST[ "datum" ];
+    $tijd = $_POST[ "tijd" ];
 
-    $timestamp = strtotime("$datum $tijd");
-    echo "$timestamp";
+    $array = print_r( $_POST );
 
     if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($email) || empty($datum) || empty($tijd)) {
         echo "Vul alsjeblieft alle velden in.";
@@ -117,14 +116,17 @@ if (isset($_POST['submit'])) {
                     </div>
                     <label for="tijd">Tijd</label><br>
                     <div class="form-row">
-                        <input type="time" name="tijd" id="tijd" value="<? if(isset($tijd)){echo "$tijd";} else {echo "";} ?>">
+                        <input type="time" name="tijd" id="tijd" value="<? if(isset($tijd)){echo '' . $tijd ;} else { echo "";} ?>">
                     </div>
                 </div>
                 <div class="button" id="submit">
-                    <input type="submit" value="Submit">
+                    <input type="submit" name="submit" value="Submit">
                 </div>
             </div>
         </form>
+    </div>
+    <div class="row">
+        <p><?= $array; ?></p>
     </div>
 <div class="footer">
 

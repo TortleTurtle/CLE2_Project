@@ -25,17 +25,15 @@ if (isset($_POST['submit'])) {
     $datum = $_POST["datum"];
     $tijd = $_POST["tijd"];
 
-    $timestamp = strtotime("$datum $tijd");
-    echo "$timestamp";
 
     if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($email) || empty($datum) || empty($tijd)) {
         echo "Vul alsjeblieft alle velden met een * in.";
     } elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
         echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in.";
     } else {
-        $querry = "INSERT INTO reserveringen (voornaam, achternaam, tel_num, email, order_type, aantal_pers, maaltijd_1, maaltijd_2, datum)
-    VALUES ('$voornaam', $achternaam, $telnummer, $email, $keuze, $personen, $maaltijd_1, $maaltijd_2, $timestamp)";
-        mysqli_query($db, $querry);
+        $querry = "INSERT INTO reserveringen (voornaam, achternaam, tel_num, email, order_type, aantal_pers, maaltijd_1, maaltijd_2, datum, tijd)
+    VALUES ( $voornaam, $achternaam, $telnummer, $email, $keuze, $personen, $maaltijd_1, $maaltijd_2, $timestamp, $tijd )";
+        mysqli_query( $db, $querry );
         echo "<script type='text/javascript'>alert('De reservering is succesvol geplaatst!');</script>";
     }
 }
@@ -92,21 +90,21 @@ if (isset($_POST['submit'])) {
                 </div>
                 <label for="maaltijd 2">Maaltijd 2:</label><br>
                 <div class="form-row">
-                    <input type="number" name="maaltijd_2" id="maaltijd_2" placeholder="Hoeveel porties?" value="<?php if(isset($maaltijd_2)){echo "$maaltijd_2";} else {echo "";} ?>">
+                    <input type="number" name="maaltijd_2" id="maaltijd_2" placeholder="Hoeveel porties?" value="<?php if ( isset ( $maaltijd_2 ) ) {echo "$maaltijd_2";} else {echo "";} ?>">
                 </div>
             </div>
             <div class="container" id="datumtijd">
                 <label for="datum">Datum*</label><br>
                 <div class="form-row">
-                    <input type="date" name="datum" id="datum" value="<?php if(isset($datum)){echo "$datum";} else {echo "";} ?>">
+                    <input type="date" name="datum" id="datum" value="<?php if ( isset ( $datum ) ) { echo "$datum"; } else { echo ""; } ?>">
                 </div>
                 <label for="tijd">Tijd*</label><br>
                 <div class="form-row">
-                    <input type="time" name="tijd" id="tijd" value="<? if(isset($tijd)){echo "$tijd";} else {echo "";} ?>">
+                    <input type="time" name="tijd" id="tijd" value="<? if ( isset ( $tijd ) ) { echo "$tijd"; } else { echo ""; } ?>">
                 </div>
             </div>
             <div class="button" id="submit">
-                <input type="submit" value="Submit">
+                <input type="submit" name="submit" value="Submit">
             </div>
         </div>
     </form>
