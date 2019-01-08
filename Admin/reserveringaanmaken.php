@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
             <h2>Details</h2>
             <label for="keuze">Tafelen of afhalen?*</label><br>
             <select name="keuze" id="keuze" form="reservering">
-                <option value="tafelen">Tafelen</option>
+                <option value="tafel">Tafelen</option>
                 <option value="afhalen">Afhalen</option>
             </select>
             <div class="container" id="tafel">

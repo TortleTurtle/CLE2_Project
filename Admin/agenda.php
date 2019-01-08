@@ -13,15 +13,39 @@ if ( !( isset ( $_SESSION['gebruikersnaam']) ) ) {
     exit();
 }
 
-//Als de pagina laad laat hij alles van de huidige dag zien.
-$date = date('y-m-d');
-
-$querry = "SELECT * FROM reserveringen";
-$result = mysqli_query( $db, $querry );
-
 $reserveringen = [];
+
+if ( isset ( $_POST[ 'submit'] ) ) {
+    if ( empty( $_POST[ 'datum' ] ) && empty( $_POST[ 'type' ] ) ) {
+        $message = "Geef de filter velden een waarde" ;
+        $datum = date( 'Y-m-d' ) ;
+        $querry = "SELECT * FROM reserveringen WHERE datum='datum' ORDER BY tijd;" ;
+    }
+    elseif ( empty( $_POST[ 'datum' ] ) && !( empty( $_POST[ 'type' ] ) ) ) {
+        $datum = date( 'Y-m-d') ;
+        $type = $_POST[ 'type' ] ;
+        $querry = "SELECT * FROM reserveringen WHERE datum='datum' AND order_type='$type' ORDER BY tijd;" ;
+    }
+    elseif ( !( empty( $_POST[ 'datum' ] ) ) && empty( $_POST[ 'type'] ) ) {
+        $datum = $_POST[ 'datum' ] ;
+        $querry = "SELECT * FROM reserveringen WHERE datum='datum' ORDER BY tijd;" ;
+    }
+    else {
+        $datum = $_POST[ 'datum' ] ;
+        $type = $_POST[ 'type' ] ;
+        $querry = "SELECT * FROM reserveringen WHERE datum='datum' AND order_type='$type' ORDER BY tijd;" ;
+    }
+}
+else {
+    //Als de pagina wordt de huidige datum gebruikt.
+    echo "submit is niet ingedrukt";
+    $datum = date('Y-m-d');
+    $querry = "SELECT * FROM reserveringen WHERE datum='$datum' ORDER BY tijd;" ;
+}
+
+$result = mysqli_query( $db, $querry );
 while ( $row = mysqli_fetch_assoc( $result ) ) {
-    $reserveringen[] = $row ;
+    $reserveringen[] = $row;
 }
 
 print_r($reserveringen);
@@ -46,8 +70,9 @@ print_r($reserveringen);
                 <div class="container" id="extrafilters">
                     <label for="type">Tafel of Afhaal</label>
                     <select name="type" id="type" form="filter">
-                        <option>Tafel</option>
-                        <option>Afhaal</option>
+                        <option value="">n.v.t.</option>
+                        <option value="tafel">Tafel</option>
+                        <option value="afhaal">Afhaal</option>
                     </select>
                 </div>
                 <input type="submit" name="submit" id="submit">
@@ -55,12 +80,13 @@ print_r($reserveringen);
         </div>
     </div>
     <div class="row">
+        <h3>De afspraken voor <?= $datum ; ?></h3>
+    </div>
+    <div class="row">
         <div class="container" id="tabel">
             <table>
                 <tr>
-                    <th>Reserveringsnummer</th>
-                    <th>Voornaam</th>
-                    <th>Achternaam</th>
+                    <th>Naam</th>
                     <th>Telefoonnummer</th>
                     <th>Type bestelling</th>
                     <th>Aantal personen</th>
@@ -71,23 +97,18 @@ print_r($reserveringen);
                 </tr>
                 <?php foreach ( $reserveringen as $reservering) { ?>
                     <tr>
-                        <td><?= $reservering[ 'res_id' ] ; ?></td>
-                        <td><?= $reservering[ 'voornaam' ] ; ?></td>
-                        <td><?= $reservering[ 'achternaam' ] ; ?></td>
+                        <td><?= $reservering[ 'voornaam' ] . " " . $reservering[ 'achternaam' ] ; ?></td>
                         <td><?= $reservering[ 'tel_num' ] ; ?></td>
                         <td><?= $reservering[ 'order_type' ] ; ?></td>
                         <td><?= $reservering[ 'aantal_pers' ] ; ?></td>
-                        <td><?= $reservering[ 'maaltijd_1' ] ; ?></td>
                         <td><?= $reservering[ 'maaltijd_2' ] ; ?></td>
-                        <td><?= $reservering[ 'datum' ] ; ?></td>
+                        <td><?= $reservering[ 'maaltijd_1' ] ; ?></td>
                         <td><?= $reservering[ 'tijd' ] ; ?></td>
+                        <td><a href="details.php?res_id=<?= $reservering[ 'res_id' ] ; ?>">Details</a></td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
-    </div>
-    <div class="row">
-
     </div>
 </div>
 </body>
