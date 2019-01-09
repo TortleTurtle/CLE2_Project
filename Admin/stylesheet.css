@@ -24,50 +24,10 @@ body {
     margin-top: 30px;
 }
 
-#maken, #aanpassen, #agenda {
-    width: 30%;
-    height: auto;
-}
-
-/* CSS voor de header*/
-header {
-    background-color: #FF662E;
-    text-align: center;
-    width: 100%;
-    height: auto;
-    color: #FFFFFF;
-}
-header h3 {
-    font-family: Poiret One, sans-serif;
-    font-size: large;
-    font-weight: bold;
-    font-style: normal;
-    line-height: inherit;
-}
-
-/* Css bedoeld voor divs rondom een form gewrapped */
-div.form {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    line-height: 1.50em;
-}
-div.formrow {
-    display: flex;
-}
-
-/* Forms */
-#formcontainer form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-}
-#detailscontainer {
-    flex-basis: 40%;
-}
-#contactcontainer {
-    flex-basis: 40%;
+/*Font faces here */
+@font-face {
+    font-family: "Poiret One";
+    src: url("../includes/fonts/PoiretOne-Regular.ttf");
 }
 
 /*CSS voor de standaard formats van de headers*/
@@ -96,7 +56,59 @@ h6 {
     font-size: 1.25em;
 }
 
-@font-face {
-    font-family: "Poiret One";
-    src: url("../includes/fonts/PoiretOne-Regular.ttf");
+/* CSS for the header*/
+header {
+    background-color: #FF662E;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    color: #FFFFFF;
 }
+header h3 {
+    font-family: Poiret One, sans-serif;
+    font-size: large;
+    font-weight: bold;
+    font-style: normal;
+    line-height: inherit;
+}
+
+/* Css meant to be wrapped arround forms or input tags */
+div.form {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    line-height: 1.50em;
+}
+div.formrow {
+    display: flex;
+}
+
+/* Forms */
+#formcontainer form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#detailscontainer {
+    flex-basis: 40%;
+}
+#contactcontainer {
+    flex-basis: 40%;
+}
+
+/* Buttons */
+.button {
+    background-color: #FF662E;
+    border: 1px solid black;
+    height: 50px;
+    font-family: Poiret One, sans-serif;
+    font-weight: bold;
+}
+
+/* css code specific to adminpage.php */
+#maken, #aanpassen, #agenda {
+    width: 30%;
+    height: auto;
+}
+

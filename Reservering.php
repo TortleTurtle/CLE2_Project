@@ -116,7 +116,7 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
                     </div>
                     <label for="tijd">Tijd</label><br>
                     <div class="form-row">
-                        <input type="time" name="tijd" id="tijd" value="<? if(isset($tijd)){echo '' . $tijd ;} else { echo "";} ?>">
+                        <input type="time" name="tijd" id="tijd" value="<?php if(isset($tijd)){echo '' . $tijd ;} else { echo '';} ?>">
                     </div>
                 </div>
                 <div class="button" id="submit">

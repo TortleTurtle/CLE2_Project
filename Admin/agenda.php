@@ -1,6 +1,4 @@
 <?php
-//connectie tot de database.
-include_once '../includes/php/connect.php';
 
 //start de sessie
 session_start();
@@ -12,6 +10,9 @@ if ( !( isset ( $_SESSION['gebruikersnaam']) ) ) {
     //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
     exit();
 }
+
+//connectie tot de database.
+include_once '../includes/php/connect.php';
 
 $reserveringen = [];
 
@@ -48,7 +49,8 @@ while ( $row = mysqli_fetch_assoc( $result ) ) {
     $reserveringen[] = $row;
 }
 
-print_r($reserveringen);
+mysqli_close($db);
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
