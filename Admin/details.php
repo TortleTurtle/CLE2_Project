@@ -28,6 +28,10 @@ $details = mysqli_fetch_assoc( $result ) ;
         function sendToEdit() {
             window.location.href = "edit.php?res_id=<?= $res_id ; ?>" ;
         }
+
+        function deleteReservering() {
+            window.location.href = "delete.php?res_id=<?= $res_id ; ?>" ;
+        }
     </script>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
@@ -72,6 +76,9 @@ $details = mysqli_fetch_assoc( $result ) ;
 <div class="row">
     <div class="container">
         <button class="button" onclick="sendToEdit()">Reservering Aanpassen</button>
+    </div>
+    <div class="container">
+        <button class="button" onclick="deleteReservering()">Verwijderen</button>
     </div>
 </div>
 </body>

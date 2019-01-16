@@ -1,6 +1,5 @@
 <?php
 
-//start de sessie
 session_start();
 
 //controleer of er wel ingelogd is.
@@ -16,37 +15,40 @@ include_once '../includes/php/connect.php';
 
 $reserveringen = [];
 
+//De filters waarmee waardoor specifieke reserveringen getoond mee kunnen worden.
 if ( isset ( $_POST[ 'submit'] ) ) {
+
+    echo "submit is ingedrukt";
+
     if ( empty( $_POST[ 'datum' ] ) && empty( $_POST[ 'type' ] ) ) {
         $message = "Geef de filter velden een waarde" ;
         $datum = date( 'Y-m-d' ) ;
-        $querry = "SELECT * FROM reserveringen WHERE datum='datum' ORDER BY tijd;" ;
+        $querry = "SELECT * FROM reserveringen WHERE datum = '$datum' ORDER BY tijd;" ;
     }
     elseif ( empty( $_POST[ 'datum' ] ) && !( empty( $_POST[ 'type' ] ) ) ) {
         $datum = date( 'Y-m-d') ;
         $type = $_POST[ 'type' ] ;
-        $querry = "SELECT * FROM reserveringen WHERE datum='datum' AND order_type='$type' ORDER BY tijd;" ;
+        $querry = "SELECT * FROM reserveringen WHERE datum = '$datum' AND order_type='$type' ORDER BY tijd;" ;
     }
     elseif ( !( empty( $_POST[ 'datum' ] ) ) && empty( $_POST[ 'type'] ) ) {
         $datum = $_POST[ 'datum' ] ;
-        $querry = "SELECT * FROM reserveringen WHERE datum='datum' ORDER BY tijd;" ;
+        $querry = "SELECT * FROM reserveringen WHERE datum = '$datum' ORDER BY tijd;" ;
     }
     else {
         $datum = $_POST[ 'datum' ] ;
         $type = $_POST[ 'type' ] ;
-        $querry = "SELECT * FROM reserveringen WHERE datum='datum' AND order_type='$type' ORDER BY tijd;" ;
+        $querry = "SELECT * FROM reserveringen WHERE datum = '$datum' AND order_type='$type' ORDER BY tijd;" ;
     }
 }
 else {
     //Als de pagina wordt de huidige datum gebruikt.
-    echo "submit is niet ingedrukt";
     $datum = date('Y-m-d');
-    $querry = "SELECT * FROM reserveringen WHERE datum='$datum' ORDER BY tijd;" ;
+    $querry = "SELECT * FROM reserveringen WHERE datum = '$datum' ORDER BY tijd;" ;
 }
 
-$result = mysqli_query( $db, $querry );
+$result = mysqli_query( $db, $querry ) ;
 while ( $row = mysqli_fetch_assoc( $result ) ) {
-    $reserveringen[] = $row;
+    $reserveringen[] = $row ;
 }
 
 mysqli_close($db);
@@ -66,7 +68,7 @@ mysqli_close($db);
     <div class="row">
         <div class="container">
             <h4>Filters</h4><br>
-            <form action="agenda.php" method="get" name="filter" id="filter">
+            <form action="agenda.php" method="post" name="filter" id="filter">
                 <label for="datum">Datum</label>
                     <input type="date" name="datum" id="datum">
                 <div class="container" id="extrafilters">

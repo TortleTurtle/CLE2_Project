@@ -16,8 +16,6 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
     $datum = $_POST[ "datum" ];
     $tijd = $_POST[ "tijd" ];
 
-    $array = print_r( $_POST );
-
     if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($email) || empty($datum) || empty($tijd)) {
         echo "Vul alsjeblieft alle velden in.";
     } elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
@@ -37,6 +35,14 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
     <meta charset="UTF-8">
     <title>Reserveren</title>
+    <script>
+        function takeAwaySelected() {
+            alert("Take away has been selected!");
+        }
+        function tableSelected() {
+            alert("table has been selected!");
+        }
+    </script>
 </head>
 
 <body>
@@ -79,19 +85,19 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
                 </div>
                 <label for="tel">Telefoon:</label><br>
                 <div class="form-row">
-                    <input type="tel" name="telefoon" id="tel" placeholder="0187663344" value="<?php if(isset($telnummer)){echo "$telnummer";} else {echo "";}?>"><br>
+                    <input type="tel" name="tel" id="tel" placeholder="0187663344" value="<?php if(isset($telnummer)){echo "$telnummer";} else {echo "";}?>"><br>
                 </div>
                 <label for="email">E-mail:</label><br>
                 <div class="form-row">
-                    <input type="email" name="email" id="email" placeholder="info@bijelles.nl" value="<?php if(isset($telnummer)){echo "$telnummer";} else {echo "";}?>">
+                    <input type="email" name="email" id="email" placeholder="info@bijelles.nl" value="<?php if(isset($email)){echo "$email";} else {echo "";}?>">
                 </div>
             </div>
             <div class="container" id="detailscontainer">
                 <h2>Details</h2>
                 <label for="keuze">Tafelen of afhalen?</label><br>
-                <select name="keuze" id="keuze" form="reservering">
-                    <option value="tafel">Tafelen</option>
-                    <option value="afhalen">Afhalen</option>
+                <select name="keuze" id="keuze">
+                    <option value="tafel" onclick="tableSelected()">Tafelen</option>
+                    <option value="afhalen" onclick="takeAwaySelected()">Afhalen</option>
                 </select>
                 <div class="container" id="tafel">
                     <label for="pers">Aantal personen:</label><br>
@@ -124,9 +130,6 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <p><?= $array; ?></p>
     </div>
 <div class="footer">
 
