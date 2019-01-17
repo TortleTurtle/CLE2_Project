@@ -1,24 +1,15 @@
 <?php
 
-session_start();
+session_start() ;
 
-//controleer of er wel ingelogd is.
-if ( !( isset ( $_SESSION['gebruikersnaam']) ) ) {
-    //doorsturen naar de inlog pagina.
-    header('location: login.php');
-    //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
-    exit();
-}
+include_once '../includes/php/main.php';
 
-//connectie tot de database.
-include_once '../includes/php/connect.php';
+checkLogin() ;
 
 $reserveringen = [];
 
 //De filters waarmee waardoor specifieke reserveringen getoond mee kunnen worden.
 if ( isset ( $_POST[ 'submit'] ) ) {
-
-    echo "submit is ingedrukt";
 
     if ( empty( $_POST[ 'datum' ] ) && empty( $_POST[ 'type' ] ) ) {
         $message = "Geef de filter velden een waarde" ;

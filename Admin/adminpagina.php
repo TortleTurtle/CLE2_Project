@@ -2,17 +2,15 @@
 //start de sessie om de sessievariablen op te kunnen halen.
 session_start();
 
-if ( !(isset( $_SESSION['gebruikersnaam'] ) ) ) {
-    //doorsturen naar de inlog pagina.
-    header('location: login.php');
-    //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
-    exit();
-}
+include_once "../includes/php/main.php";
+
+checkLogin() ;
 
 //uitloggen.
 if ( isset( $_POST['logout'] ) ) {
     session_destroy();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">

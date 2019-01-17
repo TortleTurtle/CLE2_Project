@@ -1,42 +1,29 @@
 <?php
-session_start();
+session_start() ;
 
-//controle of er wel ingelogd is.
-if (!(isset($_SESSION['gebruikersnaam']))) {
-    header('location: login.php');
-    //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
-    exit();
-}
+checkLogin() ;
 
-include_once "../includes/php/connect.php";
+include_once "../includes/php/main.php";
 
-if (isset($_POST['submit'])) {
-    $voornaam = mysqli_real_escape_string($db,$_POST['voornaam']);
-    $achternaam = mysqli_real_escape_string($db, $_POST["achternaam"]);
-    $telnummer = $_POST["tel"];
-    $email = mysqli_real_escape_string($db, $_POST["email"]);
+if ( isset ( $_POST[ 'submit' ] ) ) {
+    $voornaam = mysqli_real_escape_string( $db, $_POST[ 'voornaam' ] ) ;
+    $achternaam = mysqli_real_escape_string( $db, $_POST[ 'achternaam' ] ) ;
+    $telnummer = $_POST[ 'tel' ];
+    $email = mysqli_real_escape_string( $db, $_POST[ 'email' ] ) ;
 
     //Dit is voor de keuze tafelen of afhalen.
-    $keuze = $_POST["keuze"];
+    $keuze = $_POST[ 'keuze' ] ;
 
-    $personen = $_POST["pers"];
-    $maaltijd_1 = $_POST["maaltijd_1"];
-    $maaltijd_2 = $_POST["maaltijd_2"];
-    $datum = $_POST["datum"];
-    $tijd = $_POST["tijd"];
+    $personen = $_POST[ 'pers' ] ;
+    $maaltijd_1 = $_POST[ 'maaltijd_1' ] ;
+    $maaltijd_2 = $_POST[ 'maaltijd_2' ] ;
+    $datum = $_POST[ 'datum' ] ;
+    $tijd = $_POST[ 'tijd' ] ;
 
-
-    if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($email) || empty($datum) || empty($tijd)) {
-        echo "Vul alsjeblieft alle velden met een * in.";
-    } elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
-        echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in.";
-    } else {
-        $querry = "INSERT INTO reserveringen (voornaam, achternaam, tel_num, email, order_type, aantal_pers, maaltijd_1, maaltijd_2, datum, tijd)
-    VALUES ( $voornaam, $achternaam, $telnummer, $email, $keuze, $personen, $maaltijd_1, $maaltijd_2, $timestamp, $tijd )";
-        mysqli_query( $db, $querry );
-        echo "<script type='text/javascript'>alert('De reservering is succesvol geplaatst!');</script>";
-    }
+    insertBooking() ;
 }
+
+    mysqli_close( $db );
 ?>
 <!DOCTYPE html>
 <html lang="nl">

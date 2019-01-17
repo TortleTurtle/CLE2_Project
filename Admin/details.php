@@ -2,16 +2,9 @@
 
 session_start();
 
-//controleer of er wel ingelogd is.
-if ( !( isset ( $_SESSION[ 'gebruikersnaam' ] ) ) ) {
-    //doorsturen naar de inlog pagina.
-    header('location: login.php');
-    //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
-    exit();
-}
+include_once "../includes/php/main.php";
 
-//connectie met de database
-include_once "../includes/php/connect.php";
+checkLogin() ;
 
 //res_id komt van de agenda pagina af en wordt gebruikt om de juise reservering binnen te halen.
 $res_id = $_GET[ 'res_id' ];
@@ -20,6 +13,7 @@ $querry = "SELECT * FROM reserveringen WHERE res_id='$res_id'" ;
 $result = mysqli_query( $db, $querry ) ;
 $details = mysqli_fetch_assoc( $result ) ;
 
+mysqli_close( $db );
 ?>
 <!DOCTYPE html>
 <html lang="nl">

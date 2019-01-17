@@ -1,5 +1,5 @@
 <?php
-include_once "includes/php/connect.php";
+include_once "includes/php/main.php";
 
 if ( isset ( $_POST[ 'submit' ] ) ) {
     $voornaam = mysqli_real_escape_string( $db, $_POST[ 'voornaam' ] );
@@ -16,17 +16,10 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
     $datum = $_POST[ "datum" ];
     $tijd = $_POST[ "tijd" ];
 
-    if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($email) || empty($datum) || empty($tijd)) {
-        echo "Vul alsjeblieft alle velden in.";
-    } elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
-        echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in.";
-    } else {
-        $querry = "INSERT INTO reserveringen (voornaam, achternaam, tel_num, email, order_type, aantal_pers, maaltijd_1, maaltijd_2, datum)
-    VALUES ('$voornaam', $achternaam, $telnummer, $email, $keuze, $personen, $maaltijd_1, $maaltijd_2, $timestamp)";
-        mysqli_query($db, $querry);
-        echo "<script type='text/javascript'>alert('De reservering is succesvol geplaatst');</script>";
-    }
+    insertBooking();
 }
+
+mysqli_close($db);
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -35,14 +28,6 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
     <link rel="stylesheet" type="text/css" href="stylesheet.css" />
     <meta charset="UTF-8">
     <title>Reserveren</title>
-    <script>
-        function takeAwaySelected() {
-            alert("Take away has been selected!");
-        }
-        function tableSelected() {
-            alert("table has been selected!");
-        }
-    </script>
 </head>
 
 <body>
@@ -96,8 +81,8 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
                 <h2>Details</h2>
                 <label for="keuze">Tafelen of afhalen?</label><br>
                 <select name="keuze" id="keuze">
-                    <option value="tafel" onclick="tableSelected()">Tafelen</option>
-                    <option value="afhalen" onclick="takeAwaySelected()">Afhalen</option>
+                    <option value="tafel">Tafelen</option>
+                    <option value="afhalen">Afhalen</option>
                 </select>
                 <div class="container" id="tafel">
                     <label for="pers">Aantal personen:</label><br>

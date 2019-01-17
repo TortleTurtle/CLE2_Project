@@ -1,17 +1,10 @@
 <?php
+session_start() ;
 
-session_start();
+include_once '../includes/php/main.php';
 
-//controleer of er wel ingelogd is.
-if ( !( isset ( $_SESSION['gebruikersnaam']) ) ) {
-    //doorsturen naar de inlog pagina.
-    header('location: login.php');
-    //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
-    exit();
-}
+checkLogin() ;
 
-//connectie tot de database.
-include_once '../includes/php/connect.php';
 
 //res_id komt van de agenda pagina af en wordt gebruikt om de juise reservering binnen te halen.
 $res_id = $_GET[ 'res_id' ];
@@ -23,10 +16,12 @@ $details = mysqli_fetch_assoc( $result ) ;
 if ( isset ( $_POST['submit'] ) ) {
     $delete = "DELETE FROM reserveringen WHERE res_id='$res_id'" ;
     $deletequerry = mysqli_query( $db, $delete) ;
+    echo "<script> alert( 'De resrvering is verwijderd.' ) ;</script>";
     header( 'location: agenda.php') ;
     exit();
 }
 
+mysqli_close( $db ) ;
 ?>
 <!DOCTYPE html>
 <html lang="nl">

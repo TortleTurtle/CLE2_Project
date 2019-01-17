@@ -1,15 +1,10 @@
 <?php
 
-session_start();
+session_start() ;
 
-if ( !(isset ($_SESSION[ 'gebruikersnaam'] ) ) ) {
-    //doorsturen naar de inlog pagina.
-    header('location: login.php');
-    //stop het script zodat er verder niks uitgevoerd wordt op deze pagina.
-    exit();
-}
+include_once "../includes/php/main.php";
 
-include_once "../includes/php/connect.php" ;
+checkLogin() ;
 
 //De juiste reservering ophalen uit de database met behulp van de primary key
 $res_id = $_GET[ 'res_id' ] ;
@@ -36,20 +31,10 @@ if (isset($_POST['submit'])) {
     $datum = $_POST["datum"];
     $tijd = $_POST["tijd"];
 
-    // controle of alle velden wel ingevuld zijn.
-    if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($datum) || empty($tijd)) {
-        echo "Vul alsjeblieft alle velden met een * in.";
-    } elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
-        echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in.";
-    } else {
-        //update querry want de reservering moet aangepast worden.
-        $querry = "UPDATE reserveringen
-                   SET voornaam = '$voornaam', achternaam = '$achternaam', tel_num='$telnummer', email = '$email', order_type = '$keuze', aantal_pers = '$personen', maaltijd_1 = '$maaltijd_1', maaltijd_2 = '$maaltijd_2', datum = '$datum', tijd = '$tijd'
-                   WHERE res_id = '$res_id'";
-        mysqli_query( $db, $querry );
-        echo "<script type='text/javascript'>alert('De reservering is succesvol geplaatst!');</script>";
-    }
+    updateBooking() ;
 }
+
+mysqli_close( $db ) ;
 
 ?>
 <!DOCTYPE html>

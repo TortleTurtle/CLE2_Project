@@ -2,7 +2,7 @@
 //session start
 session_start();
 //De connectie tot de database
-include_once '../includes/php/connect.php';
+include_once '../includes/php/main.php';
 
 //variabelen declareren.
 $fout = "";
