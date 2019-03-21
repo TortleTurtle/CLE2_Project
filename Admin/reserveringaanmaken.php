@@ -1,9 +1,9 @@
 <?php
 session_start() ;
 
-checkLogin() ;
-
 include_once "../includes/php/main.php";
+
+checkLogin() ;
 
 if ( isset ( $_POST[ 'submit' ] ) ) {
     $voornaam = mysqli_real_escape_string( $db, $_POST[ 'voornaam' ] ) ;
@@ -20,7 +20,7 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
     $datum = $_POST[ 'datum' ] ;
     $tijd = $_POST[ 'tijd' ] ;
 
-    insertBooking() ;
+    insertBooking( $voornaam, $achternaam, $telnummer, $email, $keuze, $datum, $tijd, $personen, $maaltijd_1, $maaltijd_2, $db ) ;
 }
 
     mysqli_close( $db );
@@ -37,7 +37,7 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
     <h3>Reservering aanmaken</h3>
 </header>
 <div class="container" id="formcontainer">
-    <form action="reserveringaanmaken.php" method="post">
+    <form action="reserveringaanmaken.php" method="post" name="reservering" id="reservering">
         <div class="container" id="contactcontainer">
             <h2>Contactgegevens</h2>
             <label for="voornaam">Voornaam*:</label><br>
@@ -50,17 +50,17 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
             </div>
             <label for="tel">Telefoon*:</label><br>
             <div class="form-row">
-                <input type="tel" name="telefoon" id="tel" placeholder="0187663344" value="<?php if(isset($telnummer)){echo "$telnummer";} else {echo "";}?>"><br>
+                <input type="tel" name="tel" id="tel" placeholder="0187663344" value="<?php if(isset($telnummer)){echo "$telnummer";} else {echo "";}?>"><br>
             </div>
             <label for="email">E-mail*:</label><br>
             <div class="form-row">
-                <input type="email" name="email" id="email" placeholder="info@bijelles.nl" value="<?php if(isset($telnummer)){echo "$telnummer";} else {echo "";}?>">
+                <input type="email" name="email" id="email" placeholder="info@bijelles.nl" value="<?php if(isset($email)){echo "$email";} else {echo "";}?>">
             </div>
         </div>
         <div class="container" id="detailscontainer">
             <h2>Details</h2>
             <label for="keuze">Tafelen of afhalen?*</label><br>
-            <select name="keuze" id="keuze" form="reservering">
+            <select name="keuze" id="keuze">
                 <option value="tafel">Tafelen</option>
                 <option value="afhalen">Afhalen</option>
             </select>
@@ -90,8 +90,8 @@ if ( isset ( $_POST[ 'submit' ] ) ) {
                     <input type="time" name="tijd" id="tijd" value="<?php if ( isset ( $tijd ) ) { echo "$tijd"; } else { echo ""; } ?>">
                 </div>
             </div>
-            <div class="button" id="submit">
-                <input type="submit" name="submit" value="Submit">
+            <div class="row">
+                <button type="submit" name="submit" class="button" form="reservering">Verzend</button>
             </div>
         </div>
     </form>

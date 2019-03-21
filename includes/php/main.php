@@ -18,37 +18,40 @@ function checkLogin() {
 }
 
 //functie om de reservering in de database te zetten.
-function insertBooking() {
+function insertBooking( $vnaam, $anaam, $tel, $email, $keuze, $datum, $tijd, $pers, $maaltijd1, $maaltijd2, $connection ) {
     //eerst controleren of alle velden juist zijn ingevuld.
-    if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($email) || empty($datum) || empty($tijd)) {
-        echo "Vul alsjeblieft alle velden in.";
+    if ( empty( $vnaam ) || empty( $anaam ) || empty( $tel ) || empty( $email ) ) {
+        echo "Vul de contact gegevens correct in a.u.b." ;
     }
-    elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
+    elseif ( empty( $keuze ) || empty( $datum ) || empty( $tijd ) ) {
+        echo "De fout zit in de keuzes" ;
+    }
+    elseif (!( is_numeric( $tel ) ) || !( is_numeric( $pers ) ) || !( is_numeric( $maaltijd1 ) ) || !( is_numeric( $maaltijd2 ) ) ) {
         echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in.";
     }
     //Zo ja insert de variabelen in de database.
     else {
         $querry = "INSERT INTO reserveringen (voornaam, achternaam, tel_num, email, order_type, aantal_pers, maaltijd_1, maaltijd_2, datum, tijd )
-    VALUES ('$voornaam', '$achternaam', '$telnummer', '$email', '$keuze', '$personen', '$maaltijd_1', '$maaltijd_2', '$datum', '$tijd' )";
-        mysqli_query($db, $querry);
+    VALUES ('$vnaam', '$anaam', '$tel', '$email', '$keuze', '$pers', '$maaltijd1', '$maaltijd2', '$datum', '$tijd' )";
+        mysqli_query( $connection, $querry);
         echo "<script type='text/javascript'>alert('De reservering is succesvol geplaatst');</script>";
     }
 }
 
 //functie om een rij te updaten.
-function updateBooking() {
+function updateBooking( $vnaam, $anaam, $tel, $email, $keuze, $datum, $tijd, $pers, $maaltijd1, $maaltijd2, $connection ) {
     //controleer of alle velden juist zijn ingevuld.
-    if (empty($voornaam) || empty($achternaam) || empty($telnummer) || empty($email) || empty($keuze) || empty($datum) || empty($tijd)) {
+    if ( empty( $vnaam ) || empty( $anaam ) || empty( $tel ) || empty( $email ) || empty( $keuze ) || empty( $datum ) || empty( $tijd ) ) {
         echo "Vul alsjeblieft alle velden met een * in.";
-    } elseif (!(is_numeric($telnummer)) || !(is_numeric($personen)) || !(is_numeric($maaltijd_1)) || !(is_numeric($maaltijd_2))) {
-        echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in.";
+    } elseif ( !( is_numeric( $tel ) ) || !( is_numeric( $pers ) ) || !( is_numeric( $maaltijd1 ) ) || !( is_numeric( $maaltijd2 ) ) ) {
+        echo "Vul in de velden waar eenn nummer gevraagd wordt een nummer in." ;
     } else {
         //zo ja update de rij in de database.
         $querry = "UPDATE reserveringen
-                   SET voornaam = '$voornaam', achternaam = '$achternaam', tel_num='$telnummer', email = '$email', order_type = '$keuze', aantal_pers = '$personen', maaltijd_1 = '$maaltijd_1', maaltijd_2 = '$maaltijd_2', datum = '$datum', tijd = '$tijd'
+                   SET voornaam = '$vnaam', achternaam = '$anaam', tel_num='$tel', email = '$email', order_type = '$keuze', aantal_pers = '$pers', maaltijd_1 = '$maaltijd1', maaltijd_2 = '$maaltijd2', datum = '$datum', tijd = '$tijd'
                    WHERE res_id = '$res_id'";
-        mysqli_query( $db, $querry );
-        echo "<script type='text/javascript'>alert('De reservering is aangepast!');</script>";
+        mysqli_query( $connection, $querry );
+        echo "<script type='text/javascript'> alert( 'De reservering is aangepast!' ) ; </script>" ;
     }
 }
 ?>

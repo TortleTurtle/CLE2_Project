@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     $datum = $_POST["datum"];
     $tijd = $_POST["tijd"];
 
-    updateBooking() ;
+    updateBooking( $voornaam, $achternaam, $telnummer, $email, $keuze, $datum, $tijd, $personen, $maaltijd_1, $maaltijd_2, $db ) ;
 }
 
 mysqli_close( $db ) ;
@@ -46,7 +46,7 @@ mysqli_close( $db ) ;
 </head>
 <body>
 <div class="container" id="formcontainer">
-    <form action="" method="post">
+    <form action="" method="post" name="reservering" id="reservering">
         <div class="container" id="contactcontainer">
             <h2>Contactgegevens</h2>
             <label for="voornaam">Voornaam*:</label><br>
@@ -99,9 +99,7 @@ mysqli_close( $db ) ;
                     <input type="time" name="tijd" id="tijd" value="<?= $reservering[ 'tijd' ] ; ?>">
                 </div>
             </div>
-            <div class="container" id="submit">
-                <input type="submit" name="submit" value="Submit">
-            </div>
+            <button type="submit" name="submit" class="button" form="reservering">Verzend</button>
         </div>
     </form>
 </div>

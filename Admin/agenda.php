@@ -48,6 +48,7 @@ mysqli_close($db);
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <meta charset="UTF-8">
     <title>Agenda</title>
 </head>

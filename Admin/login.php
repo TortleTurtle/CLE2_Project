@@ -23,8 +23,6 @@ if ( isset($_POST['submit']) ) {
 
     $inloggegevens = mysqli_fetch_assoc( $result );
 
-    echo 'submit is ingedrukt';
-
     if ( $gebruikersnaam == $inloggegevens['naam'] && $wachtwoord == $inloggegevens['wachtwoord'] ){
         $_SESSION['gebruikersnaam'] = $gebruikersnaam;
         echo 'succes!';
@@ -33,6 +31,8 @@ if ( isset($_POST['submit']) ) {
         $fout = 'De ingevoerde combinatie is niet gevonden.';
     }
 }
+
+mysqli_close( $db ) ;
 
 ?>
 <!DOCTYPE html>
