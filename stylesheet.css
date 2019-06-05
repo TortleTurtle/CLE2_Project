@@ -27,7 +27,8 @@ header h2 {
     font-family: Poiret One, sans-serif;
     font-weight: bold;
     font-style: normal;
-    margin-top: 0pt;
+    /* margin-top moet naar 0 gezet worden, chrome geeft automatisch een margin mee waardoor er een wit vlak ontstaat boven de header */
+    margin-top: 0px;
 }
 
 /* footer */
