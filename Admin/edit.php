@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     $datum = $_POST["datum"];
     $tijd = $_POST["tijd"];
 
-    updateBooking( $voornaam, $achternaam, $telnummer, $email, $keuze, $datum, $tijd, $personen, $maaltijd_1, $maaltijd_2, $db ) ;
+    updateBooking( $res_id, $voornaam, $achternaam, $telnummer, $email, $keuze, $datum, $tijd, $personen, $maaltijd_1, $maaltijd_2, $db ) ;
 }
 
 mysqli_close( $db ) ;
